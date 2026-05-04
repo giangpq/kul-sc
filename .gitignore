@@ -1,0 +1,18 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data / experiment artefacts
+data/
+results.tsv
+
+# Jupyter checkpoints (root or any subfolder)
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
