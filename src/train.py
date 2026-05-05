@@ -9,6 +9,7 @@ from pathlib import Path
 import joblib
 import lightgbm as lgb
 import mlflow
+import numpy as np
 import polars as pl
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
@@ -81,6 +82,8 @@ def main():
         min_child_samples=20,
         subsample=0.8,
         colsample_bytree=0.8,
+        objective="tweedie",
+        tweedie_variance_power=1.3,
         random_state=42,
         n_jobs=12,
         device="gpu"
@@ -101,9 +104,12 @@ def main():
         val_pred = model.predict(X_val).clip(0, None)
         val_rmse = mean_squared_error(y_val, val_pred) ** 0.5
         val_mae = mean_absolute_error(y_val, val_pred)
+        denom = float(np.abs(y_val).sum())
+        val_wape = float(np.abs(y_val - val_pred).sum() / denom) if denom > 0 else 0.0
 
         mlflow.log_metric("val_rmse", val_rmse)
         mlflow.log_metric("val_mae", val_mae)
+        mlflow.log_metric("val_wape", val_wape)
 
         # Save artefacts
         joblib.dump(model,        MODEL_DIR / "model.pkl")
@@ -119,6 +125,7 @@ def main():
     print("---")
     print(f"val_rmse:              {val_rmse:.6f}")
     print(f"val_mae:               {val_mae:.6f}")
+    print(f"val_wape:              {val_wape:.6f}")
 
 
 if __name__ == "__main__":

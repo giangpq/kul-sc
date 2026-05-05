@@ -1,3 +1,51 @@
-2026/05/04 15:58:16 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
-2026/05/04 15:58:16 INFO mlflow.store.db.utils: Updating database tables
-2026/05/04 15:58:19 INFO mlflow.tracking.fluent: Experiment with name 'campsite-demand' does not exist. Creating a new experiment.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+1 warning generated.
+/cluster/processing/climate_llm/kul-sc/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+[LightGBM] [Info] This is the GPU trainer!!
+[LightGBM] [Info] Total Bins 2199
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 27
+[LightGBM] [Info] Using GPU Device: NVIDIA RTX A6000, Vendor: NVIDIA Corporation
+[LightGBM] [Info] Compiling OpenCL Kernel with 256 bins...
+[LightGBM] [Info] GPU programs have been built
+[LightGBM] [Info] Size of histogram bin entry: 8
+[LightGBM] [Info] 27 dense feature groups (33.76 MB) transferred to GPU in 0.047823 secs. 0 sparse feature groups
+[LightGBM] [Info] Start training from score -0.033632
+[100]	valid_0's tweedie: 2.78859
+[200]	valid_0's tweedie: 2.78051
+[300]	valid_0's tweedie: 2.78026
+---
+val_rmse:              0.905521
+val_mae:               0.358928
+val_wape:              0.450369

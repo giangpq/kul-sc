@@ -37,6 +37,9 @@ To set up a new experiment, work with the user to:
   encodings, group aggregations) must be fitted on **training data only**, then applied
   to val/test. No leakage.
 - Modify `src/train.py` — model type, hyperparameters, training logic.
+  Use a Tweedie objective for whichever model family is active
+  (e.g. LightGBM `objective="tweedie"`, XGBoost `objective="reg:tweedie"`,
+  scikit-learn Tweedie-compatible loss/objective where applicable).
 - Modify `src/price.py` — pricing selection logic only.
 - Use `notebooks/experiment.py` interactively via marimo-pair skill for exploration.
 
@@ -45,7 +48,7 @@ To set up a new experiment, work with the user to:
 - Modify `src/prepare.py`. It is read-only.
 - Change the train/val/test splits.
 - Evaluate on the test set during the experiment loop.
-- Install new packages. Only use what's in `pyproject.toml` (MLflow is included).
+- Install new packages. Only use what's in `pyproject.toml` (optuna, mlflow is included).
 
 ---
 
@@ -99,27 +102,28 @@ Run the existing scripts without any modifications and record the result.
 ---
 val_rmse:              12.450000
 val_mae:               8.310000
+val_wape:              0.184000
 ```
 
 Extract with:
 ```
-grep "^val_rmse:\|^val_mae:" run.log
+grep "^val_rmse:\|^val_mae:\|^val_wape:" run.log
 ```
 
 ### results_model.tsv format
 
 ```
-commit	val_rmse	val_mae	status	description
+commit	val_rmse	val_mae	val_wape	status	description
 ```
 
 - `status`: `keep`, `discard`, or `crash`
 
 Example:
 ```
-commit	val_rmse	val_mae	status	description
-a1b2c3d	12.450000	8.310000	keep	baseline
-b2c3d4e	11.200000	7.800000	keep	add momentum + occupancy features
-c3d4e5f	13.100000	9.200000	discard	switch to random forest
+commit	val_rmse	val_mae	val_wape	status	description
+a1b2c3d	12.450000	8.310000	0.184000	keep	baseline
+b2c3d4e	11.200000	7.800000	0.171000	keep	add momentum + occupancy features
+c3d4e5f	13.100000	9.200000	0.199000	discard	switch to random forest
 ```
 
 ### Keep/discard rule
