@@ -22,3 +22,4 @@ results_pricing.tsv
 logs/
 mlruns/
 mlflow.db
+\nfigures/
