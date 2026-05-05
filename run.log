@@ -1,51 +1,57 @@
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-1 warning generated.
-/cluster/processing/climate_llm/kul-sc/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
-  warnings.warn(
+[I 2026-05-05 03:28:37,685] A new study created in memory with name: no-name-1bf510e1-8549-4174-b7f8-46a21dc9c4e9
+[I 2026-05-05 03:29:03,701] Trial 0 finished with value: 0.9098201961840373 and parameters: {'learning_rate': 0.013079503402618957, 'num_leaves': 76, 'min_child_samples': 87, 'subsample': 0.8383473561252537, 'colsample_bytree': 0.6191835093262016, 'reg_alpha': 0.00019668221895453332, 'reg_lambda': 0.19232906502189198}. Best is trial 0 with value: 0.9098201961840373.
+[I 2026-05-05 03:29:10,007] Trial 1 finished with value: 0.9031610009441327 and parameters: {'learning_rate': 0.07480502551728682, 'num_leaves': 65, 'min_child_samples': 60, 'subsample': 0.8769791786456536, 'colsample_bytree': 0.9602341571393309, 'reg_alpha': 0.11332439376966498, 'reg_lambda': 0.08051997543743247}. Best is trial 1 with value: 0.9031610009441327.
+[I 2026-05-05 03:29:23,034] Trial 2 finished with value: 0.9102536469393251 and parameters: {'learning_rate': 0.03315876592804434, 'num_leaves': 151, 'min_child_samples': 37, 'subsample': 0.8689587889751145, 'colsample_bytree': 0.7165550902467679, 'reg_alpha': 1.0941476067795342, 'reg_lambda': 0.0002578949225250643}. Best is trial 1 with value: 0.9031610009441327.
+[I 2026-05-05 03:29:31,366] Trial 3 finished with value: 0.9048393735574493 and parameters: {'learning_rate': 0.052631432483625284, 'num_leaves': 172, 'min_child_samples': 66, 'subsample': 0.8107854872756269, 'colsample_bytree': 0.8112717143203972, 'reg_alpha': 0.29513306370691283, 'reg_lambda': 0.0037219265407938706}. Best is trial 1 with value: 0.9031610009441327.
+[I 2026-05-05 03:29:43,582] Trial 4 finished with value: 0.9156889460039745 and parameters: {'learning_rate': 0.03352642418018864, 'num_leaves': 189, 'min_child_samples': 76, 'subsample': 0.8334024310891658, 'colsample_bytree': 0.647544495791144, 'reg_alpha': 0.863770259552167, 'reg_lambda': 0.7358597472911643}. Best is trial 1 with value: 0.9031610009441327.
+[I 2026-05-05 03:29:53,146] Trial 5 finished with value: 0.9095759643887971 and parameters: {'learning_rate': 0.0436694986114118, 'num_leaves': 98, 'min_child_samples': 10, 'subsample': 0.6216015734092678, 'colsample_bytree': 0.740780719167638, 'reg_alpha': 0.10271023084581869, 'reg_lambda': 0.01858866217604467}. Best is trial 1 with value: 0.9031610009441327.
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.021915 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
+[LightGBM] [Info] Start training from score -0.033632
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.021154 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
+[LightGBM] [Info] Start training from score -0.033632
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.017295 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
+[LightGBM] [Info] Start training from score -0.033632
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.019080 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
+[LightGBM] [Info] Start training from score -0.033632
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.013142 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
+[LightGBM] [Info] Start training from score -0.033632
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.018567 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
+[LightGBM] [Info] Start training from score -0.033632
 [LightGBM] [Info] This is the GPU trainer!!
-[LightGBM] [Info] Total Bins 2199
-[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 27
+[LightGBM] [Info] Total Bins 3479
+[LightGBM] [Info] Number of data points in the train set: 1264368, number of used features: 36
 [LightGBM] [Info] Using GPU Device: NVIDIA RTX A6000, Vendor: NVIDIA Corporation
 [LightGBM] [Info] Compiling OpenCL Kernel with 256 bins...
 [LightGBM] [Info] GPU programs have been built
 [LightGBM] [Info] Size of histogram bin entry: 8
-[LightGBM] [Info] 27 dense feature groups (33.76 MB) transferred to GPU in 0.047823 secs. 0 sparse feature groups
+[LightGBM] [Info] 36 dense feature groups (43.41 MB) transferred to GPU in 0.028612 secs. 0 sparse feature groups
 [LightGBM] [Info] Start training from score -0.033632
-[100]	valid_0's tweedie: 2.78859
-[200]	valid_0's tweedie: 2.78051
-[300]	valid_0's tweedie: 2.78026
+[200]	valid_0's tweedie: 2.78045
 ---
-val_rmse:              0.905521
-val_mae:               0.358928
-val_wape:              0.450369
+val_rmse:              0.904321
+val_mae:               0.358963
+val_wape:              0.450413
