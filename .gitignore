@@ -11,8 +11,14 @@ wheels/
 
 # Data / experiment artefacts
 data/
-results.tsv
+results_model_may4.tsv
+results_model.tsv
+results_pricing.tsv
 
 # Jupyter checkpoints (root or any subfolder)
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
+
+logs/
+mlruns/
+mlflow.db
