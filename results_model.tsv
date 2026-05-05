@@ -1,0 +1,51 @@
+commit	val_rmse	val_mae	val_wape	status	description
+bc13f31	0.906362	0.359058	0.450532	keep	baseline
+bc13f31	0.905562	0.358757	0.450155	keep	lgbm baseline tuned estimators 900
+bc13f31	0.905095	0.358658	0.450030	keep	lgbm baseline lr0.04 subsample0.9
+bc13f31	0.923931	0.359563	0.451166	discard	xgb baseline depth7
+bc13f31	0.907177	0.359477	0.451058	discard	feature v1 with lgbm default
+bc13f31	0.904621	0.358743	0.450137	keep	feature v1 conservative
+bc13f31	0.916060	0.359692	0.451328	discard	xgb v1 regularized
+bc13f31	0.906423	0.359177	0.450681	discard	feature v2 target encodings
+bc13f31	0.905389	0.358717	0.450104	discard	feature v2 conservative slow
+bc13f31	0.910574	0.359551	0.451150	discard	xgb v2 regularized
+bc13f31	0.907623	0.359070	0.450547	discard	lgbm baseline aggressive lr
+bc13f31	0.908196	0.358736	0.450127	discard	lgbm baseline long low lr
+bc13f31	0.926464	0.359239	0.450759	discard	xgb baseline deeper
+bc13f31	0.908978	0.359256	0.450781	discard	v1 faster learning
+bc13f31	0.908151	0.358821	0.450234	discard	v1 low lr reg
+bc13f31	0.911104	0.359136	0.450630	discard	xgb v1 low lr
+bc13f31	0.907592	0.359525	0.451118	discard	v2 faster learning
+bc13f31	0.902964	0.358477	0.449803	keep	v2 low lr many trees
+bc13f31	0.909261	0.359116	0.450604	discard	xgb v2 low lr
+bc13f31	0.907529	0.359341	0.450887	discard	baseline compact leaves stochastic
+bc13f31	0.909615	0.358728	0.450117	discard	baseline high leaves high min child
+bc13f31	0.927710	0.359592	0.451203	discard	xgb baseline lr0.06
+bc13f31	0.903200	0.358712	0.450098	discard	optuna lgbm baseline 6 trials
+bc13f31	0.904377	0.358481	0.449808	discard	optuna lgbm v1 6 trials
+bc13f31	0.904321	0.358963	0.450413	discard	optuna lgbm v2 6 trials
+bc13f31	0.913442	0.360530	0.452380	discard	xgb v2 shallow
+bc13f31	0.906889	0.358990	0.450446	discard	baseline mild l1 l2
+bc13f31	0.908926	0.359357	0.450907	discard	v1 mild l1 l2
+bc13f31	0.917438	0.359681	0.451313	discard	xgb v1 mild reg
+bc13f31	0.907221	0.359261	0.450787	discard	v2 mild l1 l2
+bc13f31	0.907991	0.358859	0.450283	discard	baseline tweedie p1.2
+bc13f31	0.929850	0.359476	0.451057	discard	xgb baseline tweedie p1.2
+bc13f31	0.906661	0.359245	0.450767	discard	v1 tweedie p1.2
+bc13f31	0.906468	0.359321	0.450862	discard	v2 tweedie p1.2
+bc13f31	0.918337	0.359252	0.450775	discard	xgb v2 tweedie p1.2
+bc13f31	0.912511	0.359166	0.450667	discard	baseline tweedie p1.5
+bc13f31	0.913894	0.359714	0.451355	discard	v1 tweedie p1.5
+bc13f31	0.921735	0.359215	0.450729	discard	xgb v1 tweedie p1.5
+bc13f31	0.908443	0.359340	0.450885	discard	v2 tweedie p1.5
+bc13f31	0.911678	0.359405	0.450967	discard	xgb baseline low lr high sample
+bc13f31	0.906445	0.358949	0.450395	discard	baseline final long low lr
+bc13f31	0.907376	0.359109	0.450596	discard	v1 final long low lr
+bc13f31	0.910681	0.359381	0.450937	discard	xgb v2 low lr high sample
+bc13f31	0.906081	0.359430	0.450998	discard	v2 final long low lr
+bc13f31	0.908653	0.358847	0.450267	discard	baseline lower child samples
+bc13f31	0.960591	0.361910	0.454111	discard	xgb depth9
+bc13f31	0.906865	0.359532	0.451126	discard	v1 lower child samples
+bc13f31	0.906365	0.359412	0.450976	discard	v2 lower child samples
+bc13f31	0.934067	0.359923	0.451617	discard	xgb v1 depth9
+bc13f31	0.904971	0.358449	0.449768	discard	baseline balanced near-best

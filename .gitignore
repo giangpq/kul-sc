@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data / experiment artefacts
+data/
+results_model_may4.tsv
+results_model.tsv
+results_pricing.tsv
+
+# Jupyter checkpoints (root or any subfolder)
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+logs/
+mlruns/
+mlflow.db
+program.md
+figures/
