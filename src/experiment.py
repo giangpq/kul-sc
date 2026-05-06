@@ -92,7 +92,7 @@ def main():
             n_estimators=2600, learning_rate=0.025, num_leaves=127,
             min_child_samples=100, subsample=0.9, colsample_bytree=0.9,
             reg_alpha=0.3, reg_lambda=3.0,
-            objective="tweedie", tweedie_variance_power=1.2,
+            objective="tweedie", tweedie_variance_power=1.15,
             random_state=42, n_jobs=12,
             device=os.getenv("LGBM_DEVICE", "gpu"),
         )
@@ -108,12 +108,12 @@ def main():
         )
     elif model_family == "cat":
         params = dict(
-            loss_function="Tweedie:variance_power=1.5",
+            loss_function="Tweedie:variance_power=1.3",
             eval_metric="RMSE",
-            iterations=1200,
-            learning_rate=0.04,
-            depth=8,
-            l2_leaf_reg=8.0,
+            iterations=4000,
+            learning_rate=0.02,
+            depth=6,
+            l2_leaf_reg=20.0,
             random_seed=42,
             task_type=os.getenv("CAT_DEVICE", "GPU"),
             devices="0",
