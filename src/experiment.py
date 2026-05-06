@@ -12,6 +12,7 @@ import mlflow
 import numpy as np
 import polars as pl
 import xgboost as xgb
+from catboost import CatBoostRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import TimeSeriesSplit
 
@@ -55,7 +56,7 @@ def compute_metrics(y_true, y_pred):
     return rmse, mae, wape
 
 
-def fit_model(X_train, y_train, X_val, y_val, model_family, params):
+def fit_model(X_train, y_train, X_val, y_val, model_family, params, cat_feature_indices=None):
     if model_family == "lgbm":
         model = lgb.LGBMRegressor(**params)
         model.fit(
@@ -66,6 +67,15 @@ def fit_model(X_train, y_train, X_val, y_val, model_family, params):
     elif model_family == "xgb":
         model = xgb.XGBRegressor(**params)
         model.fit(X_train, y_train, eval_set=[(X_val, y_val)], verbose=False)
+    elif model_family == "cat":
+        model = CatBoostRegressor(**params)
+        model.fit(
+            X_train, y_train,
+            eval_set=(X_val, y_val),
+            cat_features=cat_feature_indices,
+            use_best_model=True,
+            verbose=False,
+        )
     else:
         raise ValueError(f"Unknown MODEL_FAMILY={model_family}")
     return model
@@ -95,6 +105,18 @@ def main():
             random_state=42, tree_method="hist",
             device=os.getenv("XGB_DEVICE", "cuda"),
             n_jobs=12,
+        )
+    elif model_family == "cat":
+        params = dict(
+            loss_function="Tweedie:variance_power=1.5",
+            eval_metric="RMSE",
+            iterations=1200,
+            learning_rate=0.04,
+            depth=8,
+            l2_leaf_reg=8.0,
+            random_seed=42,
+            task_type=os.getenv("CAT_DEVICE", "GPU"),
+            devices="0",
         )
 
     print(f"model_family: {model_family}")
@@ -130,21 +152,39 @@ def main():
         train_fold, fit_stats = engineer_features(train_fold, fit_stats=None)
         val_fold, _ = engineer_features(val_fold, fit_stats=fit_stats)
 
-        train_fold, val_fold, cat_encoders = encode_categoricals(train_fold, val_fold, CATEGORICAL_COLS)
+        if model_family == "cat":
+            numeric_cols = [c for c in NUMERIC_COLS if c in train_fold.columns]
+            raw_cat_cols = [c for c in CATEGORICAL_COLS if c in train_fold.columns]
+            feature_cols = numeric_cols + raw_cat_cols
 
-        enc_cols = [c + "_enc" for c in CATEGORICAL_COLS if c in train_fold.columns]
-        feature_cols = [c for c in NUMERIC_COLS if c in train_fold.columns] + enc_cols
+            X_train = train_fold.select(feature_cols).to_numpy()
+            y_train = train_fold[TARGET].to_numpy()
+            X_val = val_fold.select(feature_cols).to_numpy()
+            y_val = val_fold[TARGET].to_numpy()
 
-        X_train = train_fold[feature_cols].to_numpy()
-        y_train = train_fold[TARGET].to_numpy()
-        X_val = val_fold[feature_cols].to_numpy()
-        y_val = val_fold[TARGET].to_numpy()
+            cat_feature_indices = list(range(len(numeric_cols), len(feature_cols)))
+            cat_encoders = {}
+        else:
+            train_fold, val_fold, cat_encoders = encode_categoricals(train_fold, val_fold, CATEGORICAL_COLS)
+            enc_cols = [c + "_enc" for c in CATEGORICAL_COLS if c in train_fold.columns]
+            feature_cols = [c for c in NUMERIC_COLS if c in train_fold.columns] + enc_cols
+
+            X_train = train_fold[feature_cols].to_numpy()
+            y_train = train_fold[TARGET].to_numpy()
+            X_val = val_fold[feature_cols].to_numpy()
+            y_val = val_fold[TARGET].to_numpy()
+
+            cat_feature_indices = None
 
         try:
-            model = fit_model(X_train, y_train, X_val, y_val, model_family, params)
+            model = fit_model(X_train, y_train, X_val, y_val, model_family, params, cat_feature_indices)
         except Exception:
-            params["device"] = "cpu"
-            model = fit_model(X_train, y_train, X_val, y_val, model_family, params)
+            if model_family in {"lgbm", "xgb"}:
+                params["device"] = "cpu"
+            elif model_family == "cat":
+                params["task_type"] = "CPU"
+                params.pop("devices", None)
+            model = fit_model(X_train, y_train, X_val, y_val, model_family, params, cat_feature_indices)
 
         pred = model.predict(X_val).clip(0, None)
         rmse, mae, wape = compute_metrics(y_val, pred)
