@@ -82,7 +82,7 @@ def main():
             n_estimators=2600, learning_rate=0.025, num_leaves=127,
             min_child_samples=40, subsample=0.9, colsample_bytree=0.9,
             reg_alpha=0.1, reg_lambda=1.0,
-            objective="tweedie", tweedie_variance_power=1.3,
+            objective="tweedie", tweedie_variance_power=1.2,
             random_state=42, n_jobs=12,
             device=os.getenv("LGBM_DEVICE", "gpu"),
         )
