@@ -79,7 +79,7 @@ def main():
 
     if model_family == "lgbm":
         params = dict(
-            n_estimators=1800, learning_rate=0.03, num_leaves=127,
+            n_estimators=2600, learning_rate=0.025, num_leaves=127,
             min_child_samples=40, subsample=0.9, colsample_bytree=0.9,
             reg_alpha=0.1, reg_lambda=1.0,
             objective="tweedie", tweedie_variance_power=1.3,
