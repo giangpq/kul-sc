@@ -10,12 +10,13 @@ wheels/
 .venv
 
 # Data / experiment artefacts
+results_model_may5.tsv
 data/
 results_model_may4.tsv
 results_model.tsv
 results_pricing.tsv
 
-# Jupyter checkpoints (root or any subfolder)
+# Jupyter checkpoints # (root or any subfolder)
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
 
@@ -24,3 +25,6 @@ mlruns/
 mlflow.db
 program.md
 figures/
+archive/
+catboost_info/
+
