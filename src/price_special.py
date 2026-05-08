@@ -40,17 +40,26 @@ ID_COL    = "ReservableOptionMarketGroupId"
 MLFLOW_DEMAND_EXPERIMENT  = "campsite-demand"
 MLFLOW_PRICING_EXPERIMENT = "campsite-pricing"
 
-N_UNITS_OPT = 1000     # Sample units for optimization
-N_MC_RUNS_OPT = 10    # Fewer runs for faster optimization
+N_UNITS_OPT = 50     # Sample units for optimization
+N_MC_RUNS_OPT = 5    # Fewer runs for faster optimization
 MAX_WBA = 52    # booking horizon in weeks
-N_UNITS_EVAL = 10 # Sample units for final evaluation
-N_MC_RUNS_EVAL = 10000    # Full runs for final evaluation
+N_UNITS_EVAL = 200 # Sample units for final evaluation
+N_MC_RUNS_EVAL = 5    # Full runs for final evaluation
 MAXITER = 30
+
+SUNNY = ["Sunny Castform Season"]
 
 # Overall:
 # revenue_lift_mean_pct: 1.113886
 # revenue_lift_std_pct:  5.190966
 
+# Family:
+# revenue_lift_mean_pct: -5.767773
+# revenue_lift_std_pct:  7.170483
+
+# Sunny:
+# revenue_lift_mean_pct: 0.480188
+# revenue_lift_std_pct:  3.764273
 
 # ---------------------------------------------------------------------------
 # Multiplier model
@@ -346,6 +355,7 @@ def main():
     # --- Load and prepare calibration set ---
     print("Preparing calibration set ...")
     cal = pl.read_csv(DATA_DIR / "calibration.csv")
+    cal = cal.filter(pl.col("SpecialPeriodCode").is_in(SUNNY)) # SUNNY only
     cal, _ = engineer_features(cal, fit_stats=fit_stats)
     cal = apply_encodings(cal, cat_encoders)
     cal = add_season_bucket(cal)
@@ -368,7 +378,7 @@ def main():
     es = cma.CMAEvolutionStrategy(x0, sigma0, {
         # Initial params: [A1,  A2,   A3,   t1,   yD1]
         "bounds": [[0.7, 0.85, 1.00,  2.0, 0.5],
-                   [1.0, 1.30, 1.50, 50.0, 1.0]],
+                   [1.0, 1.30, 1.10, 50.0, 1.0]],
         "maxiter": MAXITER,
         "tolx": 1e-4,
         "seed": 42,
@@ -395,6 +405,7 @@ def main():
     # --- Evaluate on holdout ---
     print("\nEvaluating on holdout set ...")
     holdout = pl.read_csv(DATA_DIR / "holdout.csv")
+    holdout = holdout.filter(pl.col("SpecialPeriodCode").is_in(SUNNY)) # SUNNY only
     holdout, _ = engineer_features(holdout, fit_stats=fit_stats)
     holdout = apply_encodings(holdout, cat_encoders)
     holdout = add_season_bucket(holdout)
